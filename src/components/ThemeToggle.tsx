@@ -25,6 +25,8 @@ export function ThemeToggle() {
   const [position, setPosition] = React.useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = React.useState(false)
   const [dragStart, setDragStart] = React.useState({ x: 0, y: 0 })
+  const [initialMousePos, setInitialMousePos] = React.useState({ x: 0, y: 0 })
+  const [hasTriggeredDragHint, setHasTriggeredDragHint] = React.useState(false)
   const buttonRef = React.useRef<HTMLDivElement>(null)
 
   // Initialize position on mount and handle resize
@@ -56,12 +58,25 @@ export function ThemeToggle() {
     const rect = buttonRef.current.getBoundingClientRect()
     setIsDragging(true)
     setDragStart({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+    setInitialMousePos({ x: e.clientX, y: e.clientY })
   }, [])
 
   const handleMouseMove = React.useCallback((e: MouseEvent) => {
     if (!isDragging) return
+    
+    // Check if actually moved significantly (not just a click)
+    const moveThreshold = 10 // pixels
+    const moveX = Math.abs(e.clientX - initialMousePos.x)
+    const moveY = Math.abs(e.clientY - initialMousePos.y)
+    
+    if (!hasTriggeredDragHint && (moveX > moveThreshold || moveY > moveThreshold)) {
+      setHasTriggeredDragHint(true)
+      // Dispatch event to hide drag hint on actual drag
+      window.dispatchEvent(new Event('themeToggleDragged'))
+    }
+    
     setPosition(clampToBounds(e.clientX - dragStart.x, e.clientY - dragStart.y))
-  }, [isDragging, dragStart])
+  }, [isDragging, dragStart, initialMousePos, hasTriggeredDragHint])
 
   const handleMouseUp = React.useCallback(() => setIsDragging(false), [])
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { ThemeToggle } from './ThemeToggle';
+import { DragHint } from './DragHint';
 
 export default function Header() {
   const navItems = [
@@ -34,8 +35,8 @@ export default function Header() {
           </div>
         </div>
       </nav>
-      {/* Draggable theme toggle rendered outside flex */}
       <ThemeToggle />
+      <DragHint />
     </header>
   );
 }
