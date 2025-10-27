@@ -57,7 +57,7 @@ export function ThemeToggleButton({
           z-index: 1;
         }
         ::view-transition-new(root) {
-          animation: circle-blur-expand 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          animation: circle-blur-expand 0.5s cubic-bezier(0.4, 0, 0.2, 1);
           transform-origin: ${transformOrigin};
           filter: blur(0);
           z-index: 9999;
@@ -81,7 +81,7 @@ export function ThemeToggleButton({
     setTimeout(() => {
       const styleEl = document.getElementById(styleId)
       if (styleEl) styleEl.remove()
-    }, 800)
+    }, 600)
 
     // Use View Transitions API if available
     if ("startViewTransition" in document) {

@@ -21,6 +21,7 @@ const clampToBounds = (x: number, y: number) => {
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
   const [position, setPosition] = React.useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = React.useState(false)
   const [dragStart, setDragStart] = React.useState({ x: 0, y: 0 })
@@ -28,6 +29,7 @@ export function ThemeToggle() {
 
   // Initialize position on mount and handle resize
   React.useEffect(() => {
+    setMounted(true) // Prevent hydration mismatch
     const initializePosition = () => {
       const placeholder = document.getElementById('theme-toggle-placeholder')
       if (placeholder) {
@@ -85,6 +87,11 @@ export function ThemeToggle() {
       y: `${rect.top + rect.height / 2}px` 
     }
   }, [])
+
+  // Don't render until mounted to prevent hydration mismatch
+  if (!mounted) {
+    return null
+  }
 
   return (
     <div
