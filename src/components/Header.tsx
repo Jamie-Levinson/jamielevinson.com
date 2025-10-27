@@ -29,10 +29,13 @@ export default function Header() {
                 </a>
               ))}
             </div>
-            <ThemeToggle />
+            {/* spacer for draggable theme toggle */}
+            <div className="w-12 h-12 pointer-events-none" id="theme-toggle-placeholder" />
           </div>
         </div>
       </nav>
+      {/* Draggable theme toggle rendered outside flex */}
+      <ThemeToggle />
     </header>
   );
 }
