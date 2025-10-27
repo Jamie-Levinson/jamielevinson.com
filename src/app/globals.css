@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* View Transition support */
+@supports (view-transition-name: none) {
+  :root {
+    view-transition-name: root;
+  }
+}
+
 :root {
   /* Light mode - Cream journal-like aesthetic */
   --background: #faf8f3;

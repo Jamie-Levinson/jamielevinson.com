@@ -1,22 +1,34 @@
-'use client';
+"use client"
 
-import { Sun, Moon } from 'lucide-react';
-import { useTheme } from '@/hooks/useTheme';
+import * as React from "react"
+import { useTheme } from "next-themes"
+import { ThemeToggleButton } from "@/components/ui/theme-toggle-button"
 
 export function ThemeToggle() {
-  const { resolvedTheme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const handleThemeToggle = React.useCallback(() => {
+    const newTheme = theme === "dark" ? "light" : "dark"
+    setTheme(newTheme)
+  }, [theme, setTheme])
+
+  if (!mounted) {
+    return null
+  }
+
+  const currentTheme = (theme as "light" | "dark") || "light"
 
   return (
-    <button
-      onClick={toggleTheme}
-      className="p-2 rounded hover:bg-border/50 transition-colors"
-      aria-label={`Switch to ${resolvedTheme === 'light' ? 'dark' : 'light'} mode`}
-    >
-      {resolvedTheme === 'light' ? (
-        <Moon className="w-4 h-4 text-secondary" />
-      ) : (
-        <Sun className="w-4 h-4 text-secondary" />
-      )}
-    </button>
-  );
+    <ThemeToggleButton
+      theme={currentTheme}
+      onClick={handleThemeToggle}
+      variant="circle-blur"
+      start="top-right"
+    />
+  )
 }
