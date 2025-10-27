@@ -1,89 +1,77 @@
 'use client';
 
-import { Mail, Github, Linkedin } from 'lucide-react';
+import { Mail, Phone, Github, Linkedin } from 'lucide-react';
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-12 px-6 border-t border-blue-gray-200 dark:border-blue-gray-600 bg-white dark:bg-blue-gray-900">
-      <div className="max-w-4xl mx-auto">
-        <div className="space-y-12">
-          <div>
-            <h2 className="text-2xl font-semibold text-foreground mb-2">
-              Contact
-            </h2>
-            <p className="text-secondary">
-              Let's connect and discuss opportunities
-            </p>
-          </div>
+    <section id="contact" className="min-h-screen flex items-center px-6 py-20 border-t border-border">
+      <div className="max-w-3xl mx-auto w-full">
+        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-16">
+          Contact
+        </h2>
 
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <Mail className="w-4 h-4 text-secondary" />
-                <a
-                  href="mailto:jamie.levinson@uwaterloo.ca"
-                  className="text-foreground hover:text-accent"
-                >
-                  jamie.levinson@uwaterloo.ca
-                </a>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <Github className="w-4 h-4 text-secondary" />
-                <a
-                  href="https://github.com/jamielevinson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-foreground hover:text-accent"
-                >
-                  github.com/jamielevinson
-                </a>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <span className="w-4 h-4 text-secondary text-xs">📱</span>
-                <a
-                  href="tel:647-530-3009"
-                  className="text-foreground hover:text-accent"
-                >
-                  647-530-3009
-                </a>
-              </div>
-            </div>
+        <div className="space-y-10">
+          <p className="text-base text-foreground leading-relaxed">
+            I'm currently seeking opportunities in software engineering. 
+            Feel free to reach out if you'd like to connect.
+          </p>
 
-            <div className="space-y-4">
-              <h3 className="font-medium text-foreground">Send a message</h3>
-              <form className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    className="px-3 py-2 border border-blue-gray-300 dark:border-blue-gray-500 rounded bg-white dark:bg-blue-gray-800 text-foreground placeholder-secondary focus:outline-none focus:ring-1 focus:ring-accent"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    className="px-3 py-2 border border-blue-gray-300 dark:border-blue-gray-500 rounded bg-white dark:bg-blue-gray-800 text-foreground placeholder-secondary focus:outline-none focus:ring-1 focus:ring-accent"
-                  />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Subject"
-                  className="w-full px-3 py-2 border border-blue-gray-300 dark:border-blue-gray-500 rounded bg-white dark:bg-blue-gray-800 text-foreground placeholder-secondary focus:outline-none focus:ring-1 focus:ring-accent"
-                />
-                <textarea
-                  rows={4}
-                  placeholder="Message"
-                  className="w-full px-3 py-2 border border-blue-gray-300 dark:border-blue-gray-500 rounded bg-white dark:bg-blue-gray-800 text-foreground placeholder-secondary focus:outline-none focus:ring-1 focus:ring-accent"
-                ></textarea>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-foreground text-background rounded hover:bg-secondary"
-                >
-                  Send
-                </button>
-              </form>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a
+              href="mailto:jamie.levinson@uwaterloo.ca"
+              className="group flex items-center gap-4 p-4 border border-border hover:border-foreground transition-colors"
+            >
+              <div className="w-12 h-12 rounded-full bg-foreground flex items-center justify-center group-hover:bg-secondary transition-colors">
+                <Mail className="w-6 h-6 text-background" />
+              </div>
+              <div>
+                <p className="text-xs text-secondary font-medium">Email</p>
+                <p className="text-sm text-foreground font-medium">jamie.levinson@uwaterloo.ca</p>
+              </div>
+            </a>
+
+            <a
+              href="tel:647-530-3009"
+              className="group flex items-center gap-4 p-4 border border-border hover:border-foreground transition-colors"
+            >
+              <div className="w-12 h-12 rounded-full bg-foreground flex items-center justify-center group-hover:bg-secondary transition-colors">
+                <Phone className="w-6 h-6 text-background" />
+              </div>
+              <div>
+                <p className="text-xs text-secondary font-medium">Phone</p>
+                <p className="text-sm text-foreground font-medium">647-530-3009</p>
+              </div>
+            </a>
+
+            <a
+              href="https://github.com/jamielevinson"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 p-4 border border-border hover:border-foreground transition-colors"
+            >
+              <div className="w-12 h-12 rounded-full bg-foreground flex items-center justify-center group-hover:bg-secondary transition-colors">
+                <Github className="w-6 h-6 text-background" />
+              </div>
+              <div>
+                <p className="text-xs text-secondary font-medium">GitHub</p>
+                <p className="text-sm text-foreground font-medium">github.com/jamielevinson</p>
+              </div>
+            </a>
+
+            <a
+              href="https://linkedin.com/in/jamielevinson"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 p-4 border border-border hover:border-foreground transition-colors"
+            >
+              <div className="w-12 h-12 rounded-full bg-foreground flex items-center justify-center group-hover:bg-secondary transition-colors">
+                <Linkedin className="w-6 h-6 text-background" />
+              </div>
+              <div>
+                <p className="text-xs text-secondary font-medium">LinkedIn</p>
+                <p className="text-sm text-foreground font-medium">linkedin.com/in/jamielevinson</p>
+              </div>
+            </a>
           </div>
         </div>
       </div>
