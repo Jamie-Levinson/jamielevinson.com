@@ -44,7 +44,7 @@ export default function Contact() {
             </a>
 
             <a
-              href="https://github.com/jamielevinson"
+              href="https://github.com/Jamie-Levinson"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-4 p-4 border border-border hover:border-2 hover:border-foreground hover:scale-105 transition-all duration-200"
@@ -54,7 +54,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-xs text-secondary font-medium">GitHub</p>
-                <p className="text-sm text-foreground font-medium">github.com/jamielevinson</p>
+                <p className="text-sm text-foreground font-medium">github.com/Jamie-Levinson</p>
               </div>
             </a>
 

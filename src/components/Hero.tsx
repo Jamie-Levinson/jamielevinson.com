@@ -56,7 +56,7 @@ export default function Hero() {
               </a>
               
               <a
-                href="https://github.com/jamielevinson"
+                href="https://github.com/Jamie-Levinson"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 border border-border hover:border-2 hover:border-foreground hover:scale-105 transition-all duration-200"

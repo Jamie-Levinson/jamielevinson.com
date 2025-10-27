@@ -1,12 +1,15 @@
 'use client';
 
 import { FileText } from 'lucide-react';
+import Image from 'next/image';
 
 interface ExperienceItem {
   title: string;
   company: string;
   period: string;
   description: string;
+  logo: string;
+  url: string;
 }
 
 const experiences: ExperienceItem[] = [
@@ -14,19 +17,25 @@ const experiences: ExperienceItem[] = [
     title: "Full-Stack Developer Co-op",
     company: "Loop Financial",
     period: "Sep 2023 - Dec 2023, Jun 2024 - Aug 2024",
-    description: "Built and shipped core banking features using Rails, GraphQL, React, and TypeScript. Owned full development cycle from implementation through comprehensive testing with Cypress and RSpec, while collaborating with senior developers through code reviews."
+    description: "Built and shipped core banking features using Rails, GraphQL, React, and TypeScript. Owned full development cycle from implementation through comprehensive testing with Cypress and RSpec, while collaborating with senior developers through code reviews.",
+    logo: '/loop_financial_logo.png',
+    url: 'https://www.bankonloop.com/en-ca'
   },
   {
     title: "Java Developer Co-op",
     company: "Paramount Commerce",
     period: "May 2022 - Aug 2022, Jun 2023 - Aug 2023",
-    description: "Developed REST APIs with Java and Spring Boot to power payment processing microservices. Managed database schemas with Liquibase and PostgreSQL, ensuring reliability through comprehensive unit and integration testing."
+    description: "Developed REST APIs with Java and Spring Boot to power payment processing microservices. Managed database schemas with Liquibase and PostgreSQL, ensuring reliability through comprehensive unit and integration testing.",
+    logo: '/paramount_commerce_logo.jpg',
+    url: 'https://www.paramountcommerce.com/'
   },
   {
     title: "Data Engineer Intern",
     company: "Thoughtwire",
     period: "May 2021 - Aug 2021",
-    description: "Transformed complex healthcare data into actionable insights through interactive PowerBI dashboards. Collaborated with cross-functional teams in an agile environment to deliver data solutions for enterprise clients."
+    description: "Transformed complex healthcare data into actionable insights through interactive PowerBI dashboards. Collaborated with cross-functional teams in an agile environment to deliver data solutions for enterprise clients.",
+    logo: '/thoughtwire_logo.png',
+    url: 'https://www.thoughtwire.com/'
   }
 ];
 
@@ -57,20 +66,21 @@ export default function Experience() {
         {/* Timeline */}
         <div className="space-y-12">
           {experiences.map((exp, index) => (
-            <div key={index} className="flex gap-6 items-center">
+            <div key={index} className="flex gap-6 items-start">
               {/* Logo Circle */}
               <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  // TODO: Add company website links
-                  console.log(`Clicked ${exp.company} logo`);
-                }}
-                className="flex-shrink-0 w-20 h-20 rounded-full border-2 border-foreground bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-200 flex items-center justify-center shadow-sm cursor-pointer"
+                href={exp.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 w-20 h-20 rounded-full border-2 border-border hover:border-foreground hover:scale-110 transition-all duration-200 flex items-center justify-center cursor-pointer overflow-hidden bg-background"
               >
-                <span className="text-2xl font-bold">
-                  {exp.company.charAt(0)}
-                </span>
+                <Image
+                  src={exp.logo}
+                  alt={`${exp.company} logo`}
+                  width={72}
+                  height={72}
+                  className="rounded-full object-cover"
+                />
               </a>
 
               {/* Content */}
