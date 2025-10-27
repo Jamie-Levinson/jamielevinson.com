@@ -49,7 +49,7 @@ export default function Hero() {
                 href="https://linkedin.com/in/jamielevinson"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-foreground text-background hover:bg-secondary transition-colors"
+                className="flex items-center gap-2 px-4 py-2 border border-border hover:border-2 hover:border-foreground hover:scale-105 transition-all duration-200"
               >
                 <Linkedin className="w-4 h-4" />
                 <span>LinkedIn</span>
@@ -59,7 +59,7 @@ export default function Hero() {
                 href="https://github.com/jamielevinson"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 border border-border hover:bg-border/30 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 border border-border hover:border-2 hover:border-foreground hover:scale-105 transition-all duration-200"
               >
                 <Github className="w-4 h-4" />
                 <span>GitHub</span>
@@ -67,7 +67,7 @@ export default function Hero() {
               
               <a
                 href="mailto:jamie.levinson@uwaterloo.ca"
-                className="flex items-center gap-2 px-4 py-2 border border-border hover:bg-border/30 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 border border-border hover:border-2 hover:border-foreground hover:scale-105 transition-all duration-200"
               >
                 <Mail className="w-4 h-4" />
                 <span>Email</span>
@@ -78,7 +78,7 @@ export default function Hero() {
                   // TODO: Add resume download functionality
                   console.log('Resume download clicked');
                 }}
-                className="flex items-center gap-2 px-4 py-2 border border-border hover:bg-border/30 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 border border-border hover:border-2 hover:border-foreground hover:scale-105 transition-all duration-200"
               >
                 <Download className="w-4 h-4" />
                 <span>Resume</span>

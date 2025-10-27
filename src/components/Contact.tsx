@@ -19,7 +19,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <a
               href="mailto:jamie.levinson@uwaterloo.ca"
-              className="group flex items-center gap-4 p-4 border border-border hover:border-foreground transition-colors"
+              className="group flex items-center gap-4 p-4 border border-border hover:border-2 hover:border-foreground hover:scale-105 transition-all duration-200"
             >
               <div className="w-12 h-12 rounded-full bg-foreground flex items-center justify-center group-hover:bg-secondary transition-colors">
                 <Mail className="w-6 h-6 text-background" />
@@ -32,7 +32,7 @@ export default function Contact() {
 
             <a
               href="tel:647-530-3009"
-              className="group flex items-center gap-4 p-4 border border-border hover:border-foreground transition-colors"
+              className="group flex items-center gap-4 p-4 border border-border hover:border-2 hover:border-foreground hover:scale-105 transition-all duration-200"
             >
               <div className="w-12 h-12 rounded-full bg-foreground flex items-center justify-center group-hover:bg-secondary transition-colors">
                 <Phone className="w-6 h-6 text-background" />
@@ -47,7 +47,7 @@ export default function Contact() {
               href="https://github.com/jamielevinson"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 p-4 border border-border hover:border-foreground transition-colors"
+              className="group flex items-center gap-4 p-4 border border-border hover:border-2 hover:border-foreground hover:scale-105 transition-all duration-200"
             >
               <div className="w-12 h-12 rounded-full bg-foreground flex items-center justify-center group-hover:bg-secondary transition-colors">
                 <Github className="w-6 h-6 text-background" />
@@ -62,7 +62,7 @@ export default function Contact() {
               href="https://linkedin.com/in/jamielevinson"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 p-4 border border-border hover:border-foreground transition-colors"
+              className="group flex items-center gap-4 p-4 border border-border hover:border-2 hover:border-foreground hover:scale-105 transition-all duration-200"
             >
               <div className="w-12 h-12 rounded-full bg-foreground flex items-center justify-center group-hover:bg-secondary transition-colors">
                 <Linkedin className="w-6 h-6 text-background" />

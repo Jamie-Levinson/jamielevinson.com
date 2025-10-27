@@ -66,7 +66,7 @@ export default function Experience() {
                   // TODO: Add company website links
                   console.log(`Clicked ${exp.company} logo`);
                 }}
-                className="flex-shrink-0 w-20 h-20 rounded-full border-2 border-foreground bg-background hover:bg-foreground hover:text-background transition-colors flex items-center justify-center shadow-sm cursor-pointer"
+                className="flex-shrink-0 w-20 h-20 rounded-full border-2 border-foreground bg-background hover:bg-foreground hover:text-background hover:scale-110 transition-all duration-200 flex items-center justify-center shadow-sm cursor-pointer"
               >
                 <span className="text-2xl font-bold">
                   {exp.company.charAt(0)}
