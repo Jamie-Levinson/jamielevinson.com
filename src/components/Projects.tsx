@@ -9,6 +9,7 @@ interface Project {
   githubUrl: string;
   preview: string; // GIF/image URL
   technologies: string[];
+  year: number;
 }
 
 const projects: Project[] = [
@@ -24,7 +25,8 @@ const projects: Project[] = [
       "Supabase",
       "Prisma",
       "shadcn/ui"
-    ]
+    ],
+    year: 2025
   },
   {
     name: "This Site!",
@@ -37,7 +39,8 @@ const projects: Project[] = [
       "React",
       "Tailwind CSS",
       "shadcn/ui"
-    ]
+    ],
+    year: 2025
   },
   {
     name: "Stickies++",
@@ -49,7 +52,8 @@ const projects: Project[] = [
       "JavaFX",
       "Gradle",
       "GitLab"
-    ]
+    ],
+    year: 2023
   },
   {
     name: "Straights",
@@ -59,7 +63,8 @@ const projects: Project[] = [
     technologies: [
       "C++",
       "MakeFile"
-    ]
+    ],
+    year: 2022
   }
 ];
 
@@ -119,9 +124,12 @@ export default function Projects() {
                     {/* Project Info */}
                     <div className="p-4 space-y-3">
                       <div>
-                        <h3 className="text-lg font-bold text-foreground mb-1.5">
-                          {project.name}
-                        </h3>
+                        <div className="flex flex-col md:flex-row md:justify-between md:items-baseline gap-1 mb-1.5">
+                          <h3 className="text-lg font-bold text-foreground">
+                            {project.name}
+                          </h3>
+                          <span className="text-xs text-secondary">{project.year}</span>
+                        </div>
                         <p className="text-xs text-secondary leading-relaxed mb-3">
                           {project.description}
                         </p>

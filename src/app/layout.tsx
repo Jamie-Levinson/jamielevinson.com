@@ -12,6 +12,24 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: "Jamie Levinson - Software Engineer",
   description: "Full-stack software engineer with experience building production systems at Loop Financial, Paramount Commerce, and Thoughtwire. Specializing in Ruby on Rails, React/TypeScript, Java, and Python.",
+  openGraph: {
+    title: "Jamie Levinson - Software Engineer",
+    description: "Full-stack software engineer with experience building production systems at Loop Financial, Paramount Commerce, and Thoughtwire. Specializing in Ruby on Rails, React/TypeScript, Java, and Python.",
+    images: [
+      {
+        url: "/icon.png",
+        width: 1200,
+        height: 1200,
+        alt: "Jamie Levinson",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Jamie Levinson - Software Engineer",
+    description: "Full-stack software engineer with experience building production systems at Loop Financial, Paramount Commerce, and Thoughtwire.",
+    images: ["/icon.png"],
+  },
 };
 
 export default function RootLayout({
