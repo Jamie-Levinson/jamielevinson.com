@@ -85,8 +85,8 @@ export function ThemeToggleButton({
 
     // Use View Transitions API if available
     if ("startViewTransition" in document) {
-      // @ts-ignore
-      document.startViewTransition(() => onClick())
+               // @ts-expect-error - startViewTransition is not in TypeScript types yet
+               document.startViewTransition(() => onClick())
     } else {
       onClick()
     }

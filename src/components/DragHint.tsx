@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { useTheme } from "next-themes"
-import Image from "next/image"
 
 export function DragHint() {
   const { theme } = useTheme()

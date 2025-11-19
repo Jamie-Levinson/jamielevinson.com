@@ -17,7 +17,7 @@ export default function Hero() {
 
             {/* Description */}
             <p className="text-base md:text-lg text-foreground leading-relaxed max-w-2xl">
-              I'm a recent CS grad from the University of Waterloo and a full-stack engineer with experience shipping real products across fintech and modern web stacks. Hit my line if you want to build something great together.
+              I&apos;m a recent CS grad from the University of Waterloo and a full-stack engineer with experience shipping real products across fintech and modern web stacks. Hit my line if you want to build something great together.
             </p>
 
             {/* Education & Interests */}

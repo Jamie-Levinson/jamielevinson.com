@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { Github, ChevronLeft, ChevronRight } from 'lucide-react';
-import Image from 'next/image';
 
 interface Project {
   name: string;
@@ -66,20 +65,16 @@ const projects: Project[] = [
 
 export default function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState<'left' | 'right'>('right');
 
   const nextProject = () => {
-    setDirection('right');
     setCurrentIndex((prev) => (prev + 1) % projects.length);
   };
 
   const prevProject = () => {
-    setDirection('left');
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
   const goToProject = (index: number) => {
-    setDirection(index > currentIndex ? 'right' : 'left');
     setCurrentIndex(index);
   };
 
@@ -91,7 +86,7 @@ export default function Projects() {
             Projects
           </h2>
           <p className="text-base text-secondary">
-            Some things I've been building lately
+            Some things I&apos;ve been building lately
           </p>
         </div>
 
