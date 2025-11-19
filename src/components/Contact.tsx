@@ -12,7 +12,7 @@ export default function Contact() {
 
         <div className="space-y-10">
           <p className="text-base text-foreground leading-relaxed">
-            👋 Let's talk.
+            👋 Let&apos;s talk.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
