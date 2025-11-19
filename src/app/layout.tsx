@@ -10,8 +10,8 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jamie Levinson - Backend Developer",
-  description: "Backend developer specializing in Ruby and React/TypeScript. Showcasing experience from co-op internships and personal projects.",
+  title: "Jamie Levinson - Software Engineer",
+  description: "Full-stack software engineer with experience building production systems at Loop Financial, Paramount Commerce, and Thoughtwire. Specializing in Ruby on Rails, React/TypeScript, Java, and Python.",
 };
 
 export default function RootLayout({

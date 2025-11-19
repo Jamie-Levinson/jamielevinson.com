@@ -8,34 +8,53 @@ interface ExperienceItem {
   company: string;
   period: string;
   description: string;
-  logo: string;
-  url: string;
+  logo?: string;
+  url?: string;
+  technologies: string[];
 }
 
 const experiences: ExperienceItem[] = [
   {
-    title: "Full-Stack Developer Co-op",
+    title: "Full-Stack Software Engineer",
     company: "Loop Financial",
-    period: "Sep 2023 - Dec 2023, Jun 2024 - Aug 2024",
-    description: "Built and shipped core banking features using Rails, GraphQL, React, and TypeScript. Owned full development cycle from implementation through comprehensive testing with Cypress and RSpec, while collaborating with senior developers through code reviews.",
-    logo: '/loop_financial_logo.png',
-    url: 'https://www.bankonloop.com/en-ca'
+    period: "Sep – Dec 2023 and Jun – Dec 2024",
+    description: "Core contributor to a major overhaul of Loop's high-volume credit-card program, the system Canadian businesses rely on for multi-currency spending and global banking. Shipped full-stack features across the platform and helped modernize authorization logic powering thousands of daily transactions.",
+    logo: '/company_logos/loop_financial_logo.png',
+    url: 'https://www.bankonloop.com/en-ca',
+    technologies: [
+      "Ruby on Rails",
+      "TypeScript",
+      "React",
+      "GraphQL",
+      "CircleCI"
+    ]
   },
   {
     title: "Java Developer Co-op",
     company: "Paramount Commerce",
-    period: "May 2022 - Aug 2022, Jun 2023 - Aug 2023",
-    description: "Developed REST APIs with Java and Spring Boot to power payment processing microservices. Managed database schemas with Liquibase and PostgreSQL, ensuring reliability through comprehensive unit and integration testing.",
-    logo: '/paramount_commerce_logo.jpg',
-    url: 'https://www.paramountcommerce.com/'
+    period: "May – Aug 2022 and Jun – Aug 2023",
+    description: "Built REST APIs across microservices and maintained database schema to support Paramount's real-time, bank-integrated payment rails used by merchants across North America. Strengthened backend reliability through extensive testing and service improvements.",
+    logo: '/company_logos/paramount_commerce_logo.jpg',
+    url: 'https://www.paramountcommerce.com/',
+    technologies: [
+      "Python",
+      "REST API",
+      "Spring Boot",
+      "Postgres"
+    ]
   },
   {
     title: "Data Engineer Intern",
     company: "Thoughtwire",
-    period: "May 2021 - Aug 2021",
-    description: "Transformed complex healthcare data into actionable insights through interactive PowerBI dashboards. Collaborated with cross-functional teams in an agile environment to deliver data solutions for enterprise clients.",
-    logo: '/thoughtwire_logo.png',
-    url: 'https://www.thoughtwire.com/'
+    period: "May 2021 — Aug 2021",
+    description: "Crafted realistic, large-scale data sets to simulate ThoughtWire's digital-twin platform for hospitals and enterprise environments. Developed dashboards that delivered actionable insights about people, processes, and physical spaces for clients and stakeholders.",
+    logo: '/company_logos/thoughtwire_logo.png',
+    url: 'https://www.thoughtwire.com/',
+    technologies: [
+      "PowerBI",
+      "SQL",
+      "Excel"
+    ]
   }
 ];
 
@@ -49,12 +68,8 @@ export default function Experience() {
 
         {/* Resume Link */}
         <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            // TODO: Add resume download functionality
-            console.log('Resume download clicked');
-          }}
+          href="/JamieLevinsonResume.pdf"
+          download="JamieLevinsonResume.pdf"
           className="inline-flex items-center gap-2 text-sm text-secondary hover:text-foreground transition-colors mb-12 group"
         >
           <FileText className="w-4 h-4" />
@@ -68,20 +83,28 @@ export default function Experience() {
           {experiences.map((exp, index) => (
             <div key={index} className="flex gap-6 items-start">
               {/* Logo Circle */}
-              <a
-                href={exp.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-shrink-0 w-20 h-20 rounded-full border-2 border-border hover:border-foreground hover:scale-110 transition-all duration-200 flex items-center justify-center cursor-pointer overflow-hidden bg-background"
-              >
-                <Image
-                  src={exp.logo}
-                  alt={`${exp.company} logo`}
-                  width={72}
-                  height={72}
-                  className="rounded-full object-cover"
-                />
-              </a>
+              {exp.logo ? (
+                <a
+                  href={exp.url || '#'}
+                  target={exp.url ? "_blank" : undefined}
+                  rel={exp.url ? "noopener noreferrer" : undefined}
+                  className="flex-shrink-0 w-20 h-20 rounded-full border-2 border-border hover:border-foreground hover:scale-110 transition-all duration-200 flex items-center justify-center cursor-pointer overflow-hidden bg-background"
+                >
+                  <Image
+                    src={exp.logo}
+                    alt={`${exp.company} logo`}
+                    width={72}
+                    height={72}
+                    className="rounded-full object-cover"
+                  />
+                </a>
+              ) : (
+                <div className="flex-shrink-0 w-20 h-20 rounded-full border-2 border-border flex items-center justify-center bg-background">
+                  <span className="text-2xl font-bold text-foreground">
+                    {exp.company.charAt(0)}
+                  </span>
+                </div>
+              )}
 
               {/* Content */}
               <div className="flex-1 space-y-2">
@@ -93,6 +116,17 @@ export default function Experience() {
                 <p className="text-sm text-foreground leading-relaxed pt-1">
                   {exp.description}
                 </p>
+                {/* Technology Badges */}
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {exp.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-0.5 text-[10px] border border-border rounded bg-background/50 text-secondary"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           ))}

@@ -19,8 +19,8 @@ export function DragHint() {
         const rect = placeholder.getBoundingClientRect()
         // Position under initial position of theme toggle
         setPosition({
-          top: rect.top + 25,
-          left: rect.left - 100
+          top: rect.top + 20,
+          left: rect.left - 120
         })
       }
     }
@@ -44,23 +44,23 @@ export function DragHint() {
   return (
     <div 
       className="fixed z-40 pointer-events-none"
-      style={{
-        top: `${position.top}px`,
-        left: `${position.left}px`,
-        width: '200px',
-        height: 'auto'
-      }}
-    >
-      <img
-        src="/drag-hint.svg"
-        alt="Drag me to move theme toggle"
-        className="drop-shadow-lg"
-        style={{
-          width: '200px',
-          height: 'auto',
-          filter: theme === "dark" ? "brightness(0) invert(1)" : "none"
-        }}
-      />
+              style={{
+                top: `${position.top}px`,
+                left: `${position.left}px`,
+                width: '220px',
+                height: 'auto'
+              }}
+            >
+              <img
+                src="/drag-hint.svg"
+                alt="Drag me to move theme toggle"
+                className="drop-shadow-lg"
+                style={{
+                  width: '220px',
+                  height: 'auto',
+                  filter: theme === "dark" ? "brightness(0) invert(1)" : "none"
+                }}
+              />
     </div>
   )
 }

@@ -6,19 +6,18 @@ export default function Contact() {
   return (
     <section id="contact" className="min-h-screen flex items-center px-6 py-20 border-t border-border">
       <div className="max-w-3xl mx-auto w-full">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-16">
+        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
           Contact
         </h2>
 
         <div className="space-y-10">
           <p className="text-base text-foreground leading-relaxed">
-            I'm currently seeking opportunities in software engineering. 
-            Feel free to reach out if you'd like to connect.
+            👋 Let's talk.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <a
-              href="mailto:jamie.levinson@uwaterloo.ca"
+              href="mailto:jamie@levinson.ca"
               className="group flex items-center gap-4 p-4 border border-border hover:border-2 hover:border-foreground hover:scale-105 transition-all duration-200"
             >
               <div className="w-12 h-12 rounded-full bg-foreground flex items-center justify-center group-hover:bg-secondary transition-colors">
@@ -26,7 +25,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-xs text-secondary font-medium">Email</p>
-                <p className="text-sm text-foreground font-medium">jamie.levinson@uwaterloo.ca</p>
+                <p className="text-sm text-foreground font-medium">jamie@levinson.ca</p>
               </div>
             </a>
 
@@ -59,7 +58,7 @@ export default function Contact() {
             </a>
 
             <a
-              href="https://linkedin.com/in/jamielevinson"
+              href="https://linkedin.com/in/jamielevinson1"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-4 p-4 border border-border hover:border-2 hover:border-foreground hover:scale-105 transition-all duration-200"
@@ -69,7 +68,7 @@ export default function Contact() {
               </div>
               <div>
                 <p className="text-xs text-secondary font-medium">LinkedIn</p>
-                <p className="text-sm text-foreground font-medium">linkedin.com/in/jamielevinson</p>
+                <p className="text-sm text-foreground font-medium">linkedin.com/in/jamielevinson1</p>
               </div>
             </a>
           </div>
