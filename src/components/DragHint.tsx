@@ -4,13 +4,16 @@ import * as React from "react"
 import { useTheme } from "next-themes"
 
 export function DragHint() {
-  const { theme } = useTheme()
+  const { theme, resolvedTheme } = useTheme()
   const [position, setPosition] = React.useState({ top: 0, left: 0 })
   const [mounted, setMounted] = React.useState(false)
   const [visible, setVisible] = React.useState(true)
+  const [isMobile, setIsMobile] = React.useState(false)
 
   React.useEffect(() => {
     setMounted(true)
+    // Hide on mobile devices
+    setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0)
     
     const updatePosition = () => {
       const placeholder = document.getElementById('theme-toggle-placeholder')
@@ -38,7 +41,7 @@ export function DragHint() {
     }
   }, [])
 
-  if (!mounted || !visible) return null
+  if (!mounted || !visible || isMobile) return null
 
   return (
     <div 
@@ -57,7 +60,7 @@ export function DragHint() {
                 style={{
                   width: '220px',
                   height: 'auto',
-                  filter: theme === "dark" ? "brightness(0) invert(1)" : "none"
+                  filter: resolvedTheme === "dark" ? "brightness(0) invert(1)" : "none"
                 }}
               />
     </div>

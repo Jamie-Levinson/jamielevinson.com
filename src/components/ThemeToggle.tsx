@@ -20,18 +20,22 @@ const clampToBounds = (x: number, y: number) => {
 }
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
   const [position, setPosition] = React.useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = React.useState(false)
   const [dragStart, setDragStart] = React.useState({ x: 0, y: 0 })
   const [initialMousePos, setInitialMousePos] = React.useState({ x: 0, y: 0 })
   const [hasTriggeredDragHint, setHasTriggeredDragHint] = React.useState(false)
+  const [isMobile, setIsMobile] = React.useState(false)
   const buttonRef = React.useRef<HTMLDivElement>(null)
 
   // Initialize position on mount and handle resize
   React.useEffect(() => {
     setMounted(true) // Prevent hydration mismatch
+    // Detect if mobile/touch device
+    setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0)
+    
     const initializePosition = () => {
       const placeholder = document.getElementById('theme-toggle-placeholder')
       if (placeholder) {
@@ -52,14 +56,14 @@ export function ThemeToggle() {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-  // Drag handling
+  // Drag handling (only on desktop)
   const handleMouseDown = React.useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!buttonRef.current) return
+    if (!buttonRef.current || isMobile) return
     const rect = buttonRef.current.getBoundingClientRect()
     setIsDragging(true)
     setDragStart({ x: e.clientX - rect.left, y: e.clientY - rect.top })
     setInitialMousePos({ x: e.clientX, y: e.clientY })
-  }, [])
+  }, [isMobile])
 
   const handleMouseMove = React.useCallback((e: MouseEvent) => {
     if (!isDragging) return
@@ -78,30 +82,38 @@ export function ThemeToggle() {
     setPosition(clampToBounds(e.clientX - dragStart.x, e.clientY - dragStart.y))
   }, [isDragging, dragStart, initialMousePos, hasTriggeredDragHint])
 
+
   const handleMouseUp = React.useCallback(() => setIsDragging(false), [])
 
   React.useEffect(() => {
-    if (!isDragging) return
+    if (!isDragging || isMobile) return
     document.addEventListener("mousemove", handleMouseMove)
     document.addEventListener("mouseup", handleMouseUp)
     return () => {
       document.removeEventListener("mousemove", handleMouseMove)
       document.removeEventListener("mouseup", handleMouseUp)
     }
-  }, [isDragging, handleMouseMove, handleMouseUp])
+  }, [isDragging, handleMouseMove, handleMouseUp, isMobile])
 
   const handleThemeToggle = React.useCallback(() => {
-    setTheme(theme === "dark" ? "light" : "dark")
-  }, [theme, setTheme])
+    const currentTheme = resolvedTheme || theme
+    setTheme(currentTheme === "dark" ? "light" : "dark")
+  }, [theme, resolvedTheme, setTheme])
 
   const getButtonCenter = React.useCallback(() => {
-    if (!buttonRef.current) return { x: "50%", y: "50%" }
+    if (!buttonRef.current) {
+      // Fallback: use position state if ref not ready
+      return { 
+        x: `${position.x + BUTTON_SIZE / 2}px`, 
+        y: `${position.y + BUTTON_SIZE / 2}px` 
+      }
+    }
     const rect = buttonRef.current.getBoundingClientRect()
     return { 
       x: `${rect.left + rect.width / 2}px`, 
       y: `${rect.top + rect.height / 2}px` 
     }
-  }, [])
+  }, [position])
 
   // Don't render until mounted to prevent hydration mismatch
   if (!mounted) {
@@ -109,20 +121,20 @@ export function ThemeToggle() {
   }
 
   return (
-    <div
-      ref={buttonRef}
-      style={{
-        position: "fixed",
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-        cursor: isDragging ? "grabbing" : "grab",
-        zIndex: 1000,
-        userSelect: "none",
-      }}
-      onMouseDown={handleMouseDown}
-    >
+            <div
+              ref={buttonRef}
+              style={{
+                position: "fixed",
+                left: `${position.x}px`,
+                top: `${position.y}px`,
+                cursor: isMobile ? "pointer" : (isDragging ? "grabbing" : "grab"),
+                zIndex: 1000,
+                userSelect: "none",
+              }}
+              onMouseDown={handleMouseDown}
+            >
       <ThemeToggleButton
-        theme={theme as "light" | "dark"}
+        theme={(resolvedTheme || theme) as "light" | "dark"}
         onClick={handleThemeToggle}
         start={getButtonCenter()}
         key={`${position.x}-${position.y}`}

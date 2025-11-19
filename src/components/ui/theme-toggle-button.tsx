@@ -14,30 +14,42 @@ export function ThemeToggleButton({
   onClick,
   start = "top-right",
 }: ThemeToggleButtonProps) {
+  const buttonRef = React.useRef<HTMLButtonElement>(null)
+  
   const handleClick = React.useCallback(() => {
     const styleId = `theme-transition-${Date.now()}`
     const style = document.createElement("style")
     style.id = styleId
 
-    // Handle custom coordinates
+    // Handle custom coordinates - calculate at click time to ensure accuracy
     let cx: string, cy: string
     let transformOrigin: string
     
     if (typeof start === "object") {
+      // Try to get actual button position if available (more accurate)
+      let actualX = start.x
+      let actualY = start.y
+      
+      if (buttonRef.current) {
+        const rect = buttonRef.current.getBoundingClientRect()
+        actualX = `${rect.left + rect.width / 2}px`
+        actualY = `${rect.top + rect.height / 2}px`
+      }
+      
       // Convert pixel coordinates to viewport percentages
       const viewportWidth = window.innerWidth
       const viewportHeight = window.innerHeight
       
-      const xMatch = start.x.match(/[\d.]+/)
-      const yMatch = start.y.match(/[\d.]+/)
+      const xMatch = actualX.match(/[\d.]+/)
+      const yMatch = actualY.match(/[\d.]+/)
       
       if (xMatch && yMatch) {
         const xNum = parseFloat(xMatch[0])
         const yNum = parseFloat(yMatch[0])
         
-        cx = start.x.includes('%') ? xNum.toString() : ((xNum / viewportWidth) * 100).toString()
-        cy = start.y.includes('%') ? yNum.toString() : ((yNum / viewportHeight) * 100).toString()
-        transformOrigin = `${start.x} ${start.y}`
+        cx = actualX.includes('%') ? xNum.toString() : ((xNum / viewportWidth) * 100).toString()
+        cy = actualY.includes('%') ? yNum.toString() : ((yNum / viewportHeight) * 100).toString()
+        transformOrigin = `${actualX} ${actualY}`
       } else {
         cx = "50"
         cy = "50"
@@ -93,6 +105,7 @@ export function ThemeToggleButton({
 
   return (
     <button
+      ref={buttonRef}
       onClick={handleClick}
       className="relative p-3 rounded-full border border-border bg-background hover:bg-accent/10 transition-colors duration-200 focus:outline-none active:outline-none"
       style={{ WebkitTapHighlightColor: 'transparent' }}
