@@ -4,7 +4,7 @@ import * as React from "react"
 import { useTheme } from "next-themes"
 
 export function DragHint() {
-  const { theme, resolvedTheme } = useTheme()
+  const { resolvedTheme } = useTheme()
   const [position, setPosition] = React.useState({ top: 0, left: 0 })
   const [mounted, setMounted] = React.useState(false)
   const [visible, setVisible] = React.useState(true)
