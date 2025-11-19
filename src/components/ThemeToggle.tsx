@@ -20,7 +20,7 @@ const clampToBounds = (x: number, y: number) => {
 }
 
 export function ThemeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
   const [position, setPosition] = React.useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = React.useState(false)
@@ -96,9 +96,9 @@ export function ThemeToggle() {
   }, [isDragging, handleMouseMove, handleMouseUp, isMobile])
 
   const handleThemeToggle = React.useCallback(() => {
-    const currentTheme = resolvedTheme || theme
+    const currentTheme = resolvedTheme || "light"
     setTheme(currentTheme === "dark" ? "light" : "dark")
-  }, [theme, resolvedTheme, setTheme])
+  }, [resolvedTheme, setTheme])
 
   const getButtonCenter = React.useCallback(() => {
     if (!buttonRef.current) {
@@ -134,7 +134,7 @@ export function ThemeToggle() {
               onMouseDown={handleMouseDown}
             >
       <ThemeToggleButton
-        theme={(resolvedTheme || theme) as "light" | "dark"}
+        theme={(resolvedTheme || "light") as "light" | "dark"}
         onClick={handleThemeToggle}
         start={getButtonCenter()}
         key={`${position.x}-${position.y}`}
