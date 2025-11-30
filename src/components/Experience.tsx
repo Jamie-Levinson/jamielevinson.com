@@ -15,6 +15,20 @@ interface ExperienceItem {
 
 const experiences: ExperienceItem[] = [
   {
+    title: "Software Engineer",
+    company: "Boardy",
+    period: "Nov 2025 — Present",
+    description: "Currently building the future of professional networking at a fast-paced startup. Boardy uses intelligent matching and conversational AI to connect the right people (founders with investors, talent with opportunities), cutting through the noise that makes traditional networking painful.",
+    logo: '/company_logos/boardy_logo.png',
+    url: 'https://boardy.ai',
+    technologies: [
+      "TypeScript",
+      "AI/ML",
+      "React",
+      "Nest.js"
+    ]
+  },
+  {
     title: "Full-Stack Software Engineer",
     company: "Loop Financial",
     period: "Sep – Dec 2023 and Jun – Dec 2024",
@@ -80,8 +94,8 @@ export default function Experience() {
 
         {/* Timeline */}
         <div className="space-y-12">
-          {experiences.map((exp, index) => (
-            <div key={index} className="flex gap-6 items-start">
+          {experiences.map((exp) => (
+            <div key={exp.company} className="flex gap-6 items-start">
               {/* Logo Circle */}
               {exp.logo ? (
                 <a
