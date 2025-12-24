@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface Project {
   name: string;
@@ -145,10 +146,13 @@ export default function Projects() {
                     {/* Project Preview */}
                     <div className="relative group rounded-xl md:rounded-2xl overflow-hidden border border-border/50 bg-secondary/5 aspect-video lg:aspect-auto flex items-center justify-center">
                       <div className="absolute inset-0 bg-gradient-to-tr from-black/5 to-transparent z-10" />
-                      <img
+                      <Image
                         src={project.preview}
                         alt={`${project.name} preview`}
+                        width={600}
+                        height={400}
                         className="w-full h-full object-contain p-2 md:p-4 group-hover:scale-105 transition-transform duration-500"
+                        unoptimized
                       />
                     </div>
 
