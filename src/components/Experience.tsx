@@ -1,7 +1,8 @@
 'use client';
 
-import { FileText } from 'lucide-react';
+import { FileText, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 interface ExperienceItem {
   title: string;
@@ -74,76 +75,139 @@ const experiences: ExperienceItem[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="min-h-screen flex items-center px-6 py-20 border-t border-border">
-      <div className="max-w-3xl mx-auto w-full">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">
-          Work Experience
-        </h2>
-
-        {/* Resume Link */}
-        <a
-          href="/JamieLevinsonResume.pdf"
-          download="JamieLevinsonResume.pdf"
-          className="inline-flex items-center gap-2 text-sm text-secondary hover:text-foreground transition-colors mb-12 group"
+    <section id="experience" className="min-h-screen flex items-center px-4 sm:px-6 py-16 md:py-20 relative">
+      <div className="max-w-6xl mx-auto w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col md:flex-row justify-between items-start md:items-baseline mb-10 md:mb-16 gap-3 md:gap-0"
         >
-          <FileText className="w-4 h-4" />
-          <span className="underline decoration-border group-hover:decoration-foreground">
-            Dive deeper with my resume
-          </span>
-        </a>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground">
+            Work Experience
+          </h2>
+          
+          <a
+            href="/JamieLevinsonResume.pdf"
+            download="JamieLevinsonResume.pdf"
+            className="group flex items-center gap-2 text-xs md:text-sm font-medium text-secondary hover:text-foreground"
+          >
+            <FileText className="w-3.5 h-3.5 md:w-4 md:h-4" />
+            <span className="border-b border-border group-hover:border-foreground">
+              Dive deeper with my resume
+            </span>
+          </a>
+        </motion.div>
 
-        {/* Timeline */}
-        <div className="space-y-12">
-          {experiences.map((exp) => (
-            <div key={exp.company} className="flex gap-6 items-start">
-              {/* Logo Circle */}
-              {exp.logo ? (
-                <a
-                  href={exp.url || '#'}
-                  target={exp.url ? "_blank" : undefined}
-                  rel={exp.url ? "noopener noreferrer" : undefined}
-                  className="flex-shrink-0 w-20 h-20 rounded-full border-2 border-border hover:border-foreground hover:scale-110 transition-all duration-200 flex items-center justify-center cursor-pointer overflow-hidden bg-background"
-                >
-                  <Image
-                    src={exp.logo}
-                    alt={`${exp.company} logo`}
-                    width={72}
-                    height={72}
-                    className="rounded-full object-cover"
-                  />
-                </a>
-              ) : (
-                <div className="flex-shrink-0 w-20 h-20 rounded-full border-2 border-border flex items-center justify-center bg-background">
-                  <span className="text-2xl font-bold text-foreground">
-                    {exp.company.charAt(0)}
-                  </span>
-                </div>
-              )}
+        <div className="relative">
+          {/* Dotted Timeline - positioned to center through logos */}
+          <div 
+            className="absolute left-[31px] top-8 bottom-8 w-px hidden md:block"
+            style={{
+              backgroundImage: 'repeating-linear-gradient(to bottom, var(--border) 0px, var(--border) 6px, transparent 6px, transparent 12px)'
+            }}
+          />
 
-              {/* Content */}
-              <div className="flex-1 space-y-2">
-                <div className="flex flex-col md:flex-row md:justify-between md:items-baseline gap-1">
-                  <h3 className="font-bold text-foreground">{exp.title}</h3>
-                  <span className="text-xs text-secondary">{exp.period}</span>
-                </div>
-                <p className="text-sm text-secondary">{exp.company}</p>
-                <p className="text-sm text-foreground leading-relaxed pt-1">
-                  {exp.description}
-                </p>
-                {/* Technology Badges */}
-                <div className="flex flex-wrap gap-1.5 pt-2">
-                  {exp.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2 py-0.5 text-[10px] border border-border rounded bg-background/50 text-secondary"
+          <div className="space-y-4 md:space-y-6">
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={exp.company}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="relative grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4 md:gap-8 group"
+              >
+                {/* Logo/Marker */}
+                <div className="hidden md:flex flex-col items-center relative z-10">
+                  {exp.logo ? (
+                    <a
+                      href={exp.url || '#'}
+                      target={exp.url ? "_blank" : undefined}
+                      rel={exp.url ? "noopener noreferrer" : undefined}
+                      className="w-16 h-16 rounded-full border-2 border-border bg-background flex items-center justify-center shadow-sm hover:shadow-lg hover:border-foreground hover:scale-110 transition-all duration-300 cursor-pointer overflow-hidden"
                     >
-                      {tech}
-                    </span>
-                  ))}
+                      <div className="relative w-full h-full rounded-full overflow-hidden">
+                        <Image
+                          src={exp.logo}
+                          alt={`${exp.company} logo`}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    </a>
+                  ) : (
+                    <div className="w-16 h-16 rounded-full border-2 border-border bg-background flex items-center justify-center shadow-sm">
+                      <span className="text-lg font-bold">{exp.company[0]}</span>
+                    </div>
+                  )}
                 </div>
-              </div>
-            </div>
-          ))}
+
+                {/* Content Card */}
+                <div className="relative p-4 md:p-6 rounded-xl md:rounded-2xl border border-border bg-background/50 hover:bg-background hover:border-foreground/20 transition-all duration-300 group-hover:shadow-lg">
+                  <div className="flex flex-col gap-2 mb-3">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-2">
+                      <div className="flex items-start gap-3">
+                        {/* Mobile Logo */}
+                        {exp.logo && (
+                          <a
+                            href={exp.url || '#'}
+                            target={exp.url ? "_blank" : undefined}
+                            rel={exp.url ? "noopener noreferrer" : undefined}
+                            className="md:hidden w-10 h-10 rounded-full border border-border bg-background flex-shrink-0 overflow-hidden"
+                          >
+                            <div className="relative w-full h-full rounded-full overflow-hidden">
+                              <Image
+                                src={exp.logo}
+                                alt={`${exp.company} logo`}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          </a>
+                        )}
+                        <div>
+                          <h3 className="text-base md:text-xl font-bold text-foreground flex items-center gap-2">
+                            {exp.title}
+                            {exp.url && (
+                              <a 
+                                href={exp.url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-secondary hover:text-foreground"
+                              >
+                                <ExternalLink className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                              </a>
+                            )}
+                          </h3>
+                          <p className="text-foreground/80 font-medium text-sm md:text-base">{exp.company}</p>
+                        </div>
+                      </div>
+                      <span className="text-[10px] md:text-xs font-medium text-secondary bg-secondary/5 px-2 py-0.5 rounded-full w-fit">
+                        {exp.period}
+                      </span>
+                    </div>
+                  </div>
+
+                  <p className="text-secondary leading-relaxed mb-3 md:mb-4 text-xs md:text-sm">
+                    {exp.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-1 md:gap-1.5">
+                    {exp.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-0.5 text-[10px] md:text-xs font-medium border border-border rounded-full bg-secondary/5 text-secondary"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

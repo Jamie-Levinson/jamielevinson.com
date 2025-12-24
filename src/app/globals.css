@@ -16,6 +16,8 @@
   --secondary: #333333;
   --border: #d4cfc4;
   --accent: #4a4a4a;
+  --card-hover: rgba(0, 0, 0, 0.03);
+  --font-space-mono: 'Space Mono', monospace;
 }
 
 /* Dark mode - Almost black minimalist */
@@ -26,6 +28,7 @@
     --secondary: #cccccc;
     --border: #404040;
     --accent: #e0e0e0;
+    --card-hover: rgba(255, 255, 255, 0.03);
   }
 }
 
@@ -36,6 +39,7 @@
   --secondary: #cccccc;
   --border: #404040;
   --accent: #e0e0e0;
+  --card-hover: rgba(255, 255, 255, 0.03);
 }
 
 :root:not(.dark) {
@@ -44,6 +48,7 @@
   --secondary: #333333;
   --border: #d4cfc4;
   --accent: #4a4a4a;
+  --card-hover: rgba(0, 0, 0, 0.03);
 }
 
 * {
@@ -54,6 +59,9 @@
 
 html {
   scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -61,12 +69,15 @@ body {
   background: var(--background);
   font-family: var(--font-space-mono), monospace;
   line-height: 1.6;
-  font-size: 15px;
+  font-size: 16px;
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  overflow-x: hidden;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -75,18 +86,19 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--border);
-  border-radius: 3px;
+  border-radius: 4px;
+  border: 2px solid var(--background);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--secondary);
 }
 
-
 /* Focus styles */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--foreground);
   outline-offset: 2px;
+  border-radius: 2px;
 }
 
 /* Selection styles */
@@ -95,33 +107,7 @@ body {
   color: var(--background);
 }
 
-/* Skills animations */
-@keyframes scrolling-logos {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-100% / 2));
-  }
+/* Utility classes for perspective */
+.perspective-1000 {
+  perspective: 1000px;
 }
-
-.animate-scrolling-logos {
-  animation: scrolling-logos var(--animation-duration, 40s) linear infinite;
-  animation-direction: var(--animation-direction, normal);
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out forwards;
-}
-

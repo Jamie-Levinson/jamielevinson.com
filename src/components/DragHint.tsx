@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { useTheme } from "next-themes"
+import Image from "next/image"
 
 export function DragHint() {
   const { resolvedTheme } = useTheme()
@@ -13,7 +14,7 @@ export function DragHint() {
   React.useEffect(() => {
     setMounted(true)
     // Hide on mobile devices
-    setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0)
+    setIsMobile('ontouchstart' in globalThis || navigator.maxTouchPoints > 0)
     
     const updatePosition = () => {
       const placeholder = document.getElementById('theme-toggle-placeholder')
@@ -29,15 +30,18 @@ export function DragHint() {
 
     updatePosition()
     
+    // Single retry for safety against hydration timing
+    setTimeout(updatePosition, 100)
+    
     const handleResize = () => updatePosition()
     const handleDrag = () => setVisible(false)
     
-    window.addEventListener('resize', handleResize)
-    window.addEventListener('themeToggleDragged', handleDrag)
+    globalThis.addEventListener('resize', handleResize)
+    globalThis.addEventListener('themeToggleDragged', handleDrag)
     
     return () => {
-      window.removeEventListener('resize', handleResize)
-      window.removeEventListener('themeToggleDragged', handleDrag)
+      globalThis.removeEventListener('resize', handleResize)
+      globalThis.removeEventListener('themeToggleDragged', handleDrag)
     }
   }, [])
 
@@ -46,24 +50,22 @@ export function DragHint() {
   return (
     <div 
       className="fixed z-40 pointer-events-none"
-              style={{
-                top: `${position.top}px`,
-                left: `${position.left}px`,
-                width: '220px',
-                height: 'auto'
-              }}
-            >
-              <img
-                src="/drag-hint.svg"
-                alt="Drag me to move theme toggle"
-                className="drop-shadow-lg"
-                style={{
-                  width: '220px',
-                  height: 'auto',
-                  filter: resolvedTheme === "dark" ? "brightness(0) invert(1)" : "none"
-                }}
-              />
+      style={{
+        top: `${position.top}px`,
+        left: `${position.left}px`,
+      }}
+    >
+      <Image
+        src="/drag-hint.svg"
+        alt="Drag me to move theme toggle"
+        width={220}
+        height={60}
+        className="drop-shadow-lg"
+        style={{
+          filter: resolvedTheme === "dark" ? "brightness(0) invert(1)" : "none"
+        }}
+        unoptimized
+      />
     </div>
   )
 }
-

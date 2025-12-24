@@ -107,25 +107,17 @@ export function ThemeToggleButton({
     <button
       ref={buttonRef}
       onClick={handleClick}
-      className="relative p-3 rounded-full border border-border bg-background hover:bg-accent/10 transition-colors duration-200 focus:outline-none active:outline-none"
+      className="relative p-3 rounded-full border border-border bg-background/50 backdrop-blur-md shadow-lg hover:shadow-xl hover:bg-background/80 transition-all duration-300 focus:outline-none active:scale-95 group"
       style={{ WebkitTapHighlightColor: 'transparent' }}
       aria-label={`Toggle dark/light mode`}
     >
       <div className="relative w-6 h-6">
         {theme === "light" ? (
-          <Sun className="w-full h-full text-foreground" />
+          <Sun className="w-full h-full text-foreground transition-transform duration-500 group-hover:rotate-45" />
         ) : (
-          <Moon className="w-full h-full text-foreground" />
+          <Moon className="w-full h-full text-foreground transition-transform duration-500 group-hover:-rotate-12" />
         )}
       </div>
     </button>
   )
-}
-
-export function useThemeTransition() {
-  return {
-    startTransition: (callback: () => void) => {
-      callback()
-    },
-  }
 }
