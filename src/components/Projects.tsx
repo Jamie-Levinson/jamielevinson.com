@@ -17,20 +17,6 @@ interface Project {
 
 const projects: Project[] = [
   {
-    name: "Bet Buddy (WIP)",
-    description: "Currently building a sports betting sidekick. Bet Buddy will track your bets across multiple sportsbooks and be a contextual memory engine for decision hygiene tips.",
-    githubUrl: "https://github.com/Jamie-Levinson/bet-buddy",
-    preview: "/project_gifs/betbuddy.gif",
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "Supabase",
-      "Prisma",
-      "shadcn/ui"
-    ],
-    year: 2025
-  },
-  {
     name: "This Site!",
     description: "A modern, responsive portfolio built with Next.js, TypeScript, and Tailwind CSS. Features a draggable theme toggle with smooth View Transitions API animations, dark mode support, and a clean minimalist design.",
     githubUrl: "https://github.com/Jamie-Levinson/jamielevinson.com",
@@ -46,7 +32,7 @@ const projects: Project[] = [
   {
     name: "Stickies++",
     description: "A desktop notes application built with Kotlin, JavaFX, and Gradle. Features customizable note creation, multi-window workspace management, and lightweight web service + persistence layers.",
-    githubUrl: "https://github.com/Jamie-Levinson/Straights",
+    githubUrl: "https://github.com/Jamie-Levinson/StickiesPlusPlus",
     preview: "/project_gifs/stickies++.gif",
     technologies: [
       "Kotlin",

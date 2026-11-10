@@ -1,0 +1,242 @@
+.field {
+  container-type: inline-size;
+}
+
+/* Overhangs the text column by the canvas bleed, so the first and last cells align with the margins.
+   The min-height reserves the canvas's eventual size (set in script) to avoid a layout shift. */
+.stage {
+  margin: 0 -14px;
+  min-height: calc(46px + 12.88cqw);
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 0; /* until the script sizes it; the stage holds the space */
+  touch-action: pan-y;
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* On a phone the row keeps its cell size and scrolls sideways, from one edge of the screen to the
+   other. The script scrolls it to today. Keep the width in step with NARROW in the component. */
+@container (width < 560px) {
+  .stage {
+    margin: 0 calc(var(--gutter, 16px) * -1);
+    min-height: 148px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .stage::-webkit-scrollbar {
+    display: none;
+  }
+
+  .canvas {
+    touch-action: pan-x pan-y;
+  }
+
+  /* During the game the camera moves the row, not a finger. */
+  .stage[data-playing] {
+    overflow-x: hidden;
+  }
+}
+
+.stage[data-playing] .canvas {
+  touch-action: none;
+}
+
+.caption {
+  display: flex;
+  flex-wrap: wrap; /* if the two cannot share a line, the note drops below */
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 2px 16px;
+  margin-top: 4px;
+  font: 400 11px/1.4 var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0;
+}
+
+.views {
+  display: flex;
+  gap: 14px;
+}
+
+/* The padding, cancelled by the margin, gives each word a finger-sized target without moving it. */
+.views button {
+  all: unset;
+  padding: 12px 7px;
+  margin: -12px -7px;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.2s var(--ease);
+}
+
+.views button[aria-pressed='true'] {
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .views button:hover {
+    opacity: 1;
+  }
+}
+
+.views button:focus-visible {
+  outline: 1.5px solid currentColor;
+  outline-offset: -8px;
+  border-radius: 2px;
+}
+
+/*
+ * The Play label made louder (lab: `label`): the player's box beside it, in full ink, underlined by
+ * hand like the names in the intro. The keyframes repeat the page's, which are private to its stylesheet.
+ */
+@keyframes draw {
+  from {
+    clip-path: inset(-200% 104% -200% -6%);
+  }
+  to {
+    clip-path: inset(-200% -6% -200% -6%);
+  }
+}
+
+@keyframes shake {
+  0% {
+    filter: url(#sk-rough-0);
+  }
+  25% {
+    filter: url(#sk-rough-1);
+  }
+  50% {
+    filter: url(#sk-rough-2);
+  }
+  75% {
+    filter: url(#sk-rough-3);
+  }
+}
+
+.views .loud {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  opacity: 1;
+  --accent: #fe9600;
+}
+
+.boxIcon {
+  flex: none;
+  width: 11px;
+  height: 11px;
+}
+
+.playWord {
+  position: relative;
+}
+
+.loud [data-mark='line'] {
+  stroke-width: 1.4px;
+  animation: draw 0.8s var(--ease) 2.4s backwards;
+}
+
+.loud:hover [data-mark='line'],
+.loud:focus-visible [data-mark='line'] {
+  stroke-width: 2.2px;
+  animation:
+    draw 0.8s var(--ease) 2.4s backwards,
+    shake 0.44s steps(1) infinite;
+}
+
+/* An invitation's line in the caption's place; pressing it starts the game. */
+.note {
+  all: unset;
+  cursor: pointer;
+  text-align: right;
+  color: var(--ink);
+}
+
+.note:focus-visible {
+  outline: 1.5px solid currentColor;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Touch controls for the game: a rocker to move and a button to jump, one for each thumb. */
+.pad {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 14px;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: none;
+}
+
+.rocker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(48%, 190px);
+  height: 64px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  touch-action: none;
+}
+
+.rocker span {
+  display: grid;
+  place-items: center;
+  transition: background 0.1s linear;
+}
+
+.rocker span + span {
+  border-left: 1px solid var(--line);
+}
+
+.jump {
+  all: unset;
+  display: grid;
+  place-items: center;
+  width: min(38%, 150px);
+  height: 64px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  font: 400 12px/1 var(--font-mono), ui-monospace, monospace;
+  letter-spacing: 0;
+  touch-action: none;
+  transition: background 0.1s linear;
+}
+
+.rocker span[data-on='true'],
+.jump[data-on='true'] {
+  background: var(--line);
+}
+
+.stat {
+  opacity: 0.55;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* The note has a shorter form that fits beside the buttons on a phone. */
+.short {
+  display: none;
+}
+
+@container (width < 560px) {
+  .long {
+    display: none;
+  }
+
+  .short {
+    display: inline;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .views button {
+    transition: none;
+  }
+}
