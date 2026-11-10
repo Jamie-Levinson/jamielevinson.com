@@ -126,6 +126,15 @@ function Accent({ href, accent, order, children }: { href: string; accent: strin
   );
 }
 
+/** GitHub, LinkedIn, X and email, as icons. Used at the top of the page and again at the bottom. */
+function Socials() {
+  return links.map(({ label, href, icon: Icon, accent }) => (
+    <a key={label} href={href} aria-label={label} title={label} style={tint(accent, 0)} {...(href.startsWith('http') ? external : {})}>
+      <Icon aria-hidden />
+    </a>
+  ));
+}
+
 function Rows({ title, entries, from }: { title: string; entries: Entry[]; from: number }) {
   return (
     <section className={styles.section}>
@@ -171,12 +180,8 @@ export default async function Landing({ invite }: { invite?: Invite }) {
 
       <header className={styles.top}>
         <h1>Jamie Levinson</h1>
-        <nav aria-label="Elsewhere">
-          {links.map(({ label, href, icon: Icon, accent }) => (
-            <a key={label} href={href} aria-label={label} title={label} style={tint(accent, 0)} {...(href.startsWith('http') ? external : {})}>
-              <Icon aria-hidden />
-            </a>
-          ))}
+        <nav className={styles.socials} aria-label="Elsewhere">
+          <Socials />
           <ThemeSwitch />
         </nav>
       </header>
@@ -227,7 +232,10 @@ export default async function Landing({ invite }: { invite?: Invite }) {
       </main>
 
       <footer className={styles.foot}>
-        <a href="mailto:jamie@levinson.ca">jamie@levinson.ca</a>
+        {/* The same links as the header, for whoever reads to the end. */}
+        <nav className={styles.socials} aria-label="Contact">
+          <Socials />
+        </nav>
         <p>
           {here.place} <LocalTime timeZone={here.timeZone} />
         </p>

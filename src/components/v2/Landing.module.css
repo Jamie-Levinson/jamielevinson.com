@@ -160,18 +160,19 @@
   font: inherit;
 }
 
-.top nav {
+/*
+ * Socials (in the header and again in the footer) are icons alone; each takes its own colour on
+ * hover. The padding, cancelled by the margin, makes each one a finger-sized target without moving
+ * anything: together they tile the row.
+ */
+.socials {
   --gap: clamp(16px, 1.5vw, 22px);
   display: flex;
   align-items: center;
   gap: var(--gap);
 }
 
-/*
- * Socials are icons alone; each takes its own colour on hover. The padding, cancelled by the
- * margin, makes each one a finger-sized target without moving anything: together they tile the row.
- */
-.top nav a {
+.socials a {
   display: inline-flex;
   padding: 12px calc(var(--gap) / 2);
   margin: -12px calc(var(--gap) / -2);
@@ -179,16 +180,16 @@
   transition: color 0.2s var(--ease);
 }
 
-.top nav a:hover,
-.top nav a:focus-visible {
+.socials a:hover,
+.socials a:focus-visible {
   color: var(--accent, var(--ink));
 }
 
-.top nav a:focus-visible {
+.socials a:focus-visible {
   outline-offset: -6px;
 }
 
-.top nav a svg {
+.socials a svg {
   display: block;
   width: 20px;
   height: 20px;
@@ -466,7 +467,7 @@
 .foot {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: 16px;
   padding: clamp(72px, 8vw, 128px) var(--side) 24px;
   font-size: 14px;
@@ -475,16 +476,6 @@
 .foot p {
   color: var(--dim);
   font-variant-numeric: tabular-nums;
-}
-
-.foot a {
-  transition: opacity 0.2s var(--ease);
-}
-
-@media (hover: hover) {
-  .foot a:hover {
-    opacity: 0.5;
-  }
 }
 
 /* Without hover there is nothing to reveal the colour, so show it. */
@@ -541,7 +532,7 @@
     padding-left: 28px;
   }
 
-  .top nav {
+  .socials {
     --gap: clamp(14px, 5vw, 20px);
   }
 }

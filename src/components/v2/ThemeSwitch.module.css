@@ -1,4 +1,4 @@
-/* Padded out to a finger-sized target like the links beside it (see `.top nav a`). */
+/* Padded out to a finger-sized target like the links beside it (see `.socials a`). */
 .switch {
   all: unset;
   display: inline-flex;
