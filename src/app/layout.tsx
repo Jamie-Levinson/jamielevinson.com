@@ -11,11 +11,11 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jamie Levinson - Software Engineer",
-  description: "Full-stack software engineer with experience building production systems at Loop Financial, Paramount Commerce, and Thoughtwire. Specializing in Ruby on Rails, React/TypeScript, Java, and Python.",
+  title: "Jamie Levinson",
+  description: "Member of technical staff at Boardy. Previously Loop Financial, Paramount Commerce and ThoughtWire.",
   openGraph: {
-    title: "Jamie Levinson - Software Engineer",
-    description: "Full-stack software engineer with experience building production systems at Loop Financial, Paramount Commerce, and Thoughtwire. Specializing in Ruby on Rails, React/TypeScript, Java, and Python.",
+    title: "Jamie Levinson",
+    description: "Member of technical staff at Boardy. Previously Loop Financial, Paramount Commerce and ThoughtWire.",
     images: [
       {
         url: "/icon.png",
@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Jamie Levinson - Software Engineer",
-    description: "Full-stack software engineer with experience building production systems at Loop Financial, Paramount Commerce, and Thoughtwire.",
+    title: "Jamie Levinson",
+    description: "Member of technical staff at Boardy. Previously Loop Financial, Paramount Commerce and ThoughtWire.",
     images: ["/icon.png"],
   },
 };
