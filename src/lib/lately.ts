@@ -115,6 +115,8 @@ interface Competitor {
 
 interface Game {
   date: string;
+  /** Pages about the game; the one marked as the desktop summary is ESPN's page for it. */
+  links?: { rel: string[]; href: string }[];
   competitions: { status: { type: { completed: boolean } }; competitors: Competitor[] }[];
 }
 
@@ -137,9 +139,11 @@ async function getTeam(team: (typeof TEAMS)[number], fetching: Fetching, now: Da
     if (!recent && !soon) return null;
 
     const next = coming && soon ? `Next: ${sides(coming).them.team.shortDisplayName} ${comingDay(new Date(coming.date), now)}` : '';
-    const common = { id: team.id, accent: team.accent, href: team.href, art: team.art };
+    // Each fact links to the game it reports, on ESPN; the team's own site only if the feed gives no page for it.
+    const page = (game: Game) => game.links?.find((link) => link.rel.includes('summary') && link.rel.includes('desktop'))?.href ?? team.href;
+    const common = { id: team.id, accent: team.accent, art: team.art };
     if (!played || !recent) {
-      return { ...common, short: `Next: ${shortDay(new Date(coming!.date), now)}`, line: `${team.name}. ${next}` };
+      return { ...common, href: page(coming!), short: `Next: ${shortDay(new Date(coming!.date), now)}`, line: `${team.name}. ${next}` };
     }
 
     const { us, them } = sides(played);
@@ -150,6 +154,7 @@ async function getTeam(team: (typeof TEAMS)[number], fetching: Fetching, now: Da
     const result = ours > theirs ? `beat the ${rival} ${score}` : ours < theirs ? `lost ${score} to the ${rival}` : `tied the ${rival} ${score}`;
     return {
       ...common,
+      href: page(played),
       short: `${ours > theirs ? 'Won' : ours < theirs ? 'Lost' : 'Tied'} ${score}`,
       line: `${team.name} ${result} ${onDay(new Date(played.date), now)}${next ? `. ${next}` : ''}`,
     };
