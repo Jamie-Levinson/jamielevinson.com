@@ -5,11 +5,10 @@ import { FaEnvelope, FaGithub, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6'
 import type { Invite } from './chartInvite';
 import ContributionField from './ContributionField';
 import Lately from './Lately';
-import LocalTime from './LocalTime';
 import { SketchFilters, Underline } from './sketch';
 import ThemeSwitch from './ThemeSwitch';
 import { getContributions } from '@/lib/contributions';
-import { getLately, HOME, whereabouts } from '@/lib/lately';
+import { getLately } from '@/lib/lately';
 import styles from './Landing.module.css';
 
 const sans = Inter_Tight({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-sans' });
@@ -168,7 +167,6 @@ function Rows({ title, entries, from }: { title: string; entries: Entry[]; from:
 /** The landing page. `invite` switches on one way of inviting people to the chart's game, for trying it out (see app/lab). */
 export default async function Landing({ invite }: { invite?: Invite }) {
   const [{ days, total }, lately] = await Promise.all([getContributions(), getLately()]);
-  const here = whereabouts() ?? HOME; // the footer clock shows wherever I am
 
   // The chart's column count, so the portrait can be sized to span exactly its last seven weeks.
   const leading = new Date(`${days[0][0]}T00:00:00Z`).getUTCDay();
@@ -236,9 +234,6 @@ export default async function Landing({ invite }: { invite?: Invite }) {
         <nav className={styles.socials} aria-label="Contact">
           <Socials />
         </nav>
-        <p>
-          {here.place} <LocalTime timeZone={here.timeZone} />
-        </p>
       </footer>
     </div>
   );

@@ -473,11 +473,6 @@
   font-size: 14px;
 }
 
-.foot p {
-  color: var(--dim);
-  font-variant-numeric: tabular-nums;
-}
-
 /* Without hover there is nothing to reveal the colour, so show it. */
 @media (hover: none) {
   .chip {

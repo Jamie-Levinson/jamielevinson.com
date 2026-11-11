@@ -22,12 +22,8 @@ export interface LatelyFact {
   art?: string;
 }
 
-export const HOME = { place: 'Toronto', timeZone: 'America/Toronto' };
-
-/** A stay away from home. After `until` it disappears and the clock in the footer goes back to Toronto. */
+/** A stay away from home. After `until` it disappears. */
 const AWAY = {
-  place: 'San Francisco',
-  timeZone: 'America/Los_Angeles',
   until: '2026-12-31',
   line: 'In San Francisco for the HF0 residency, September to December',
   short: 'At HF0 in SF',
@@ -36,7 +32,7 @@ const AWAY = {
   art: '/lately/hf0.png',
 };
 
-export function whereabouts(now = new Date()) {
+function whereabouts(now = new Date()) {
   return dayKey(now) <= AWAY.until ? AWAY : null;
 }
 
