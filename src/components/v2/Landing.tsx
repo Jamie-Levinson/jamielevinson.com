@@ -70,7 +70,7 @@ const work: Entry[] = [
   {
     name: 'Loop Financial',
     role: 'Full-Stack Software Engineer',
-    note: 'Overhauled the credit card program and its authorization engine: thousands of multi-currency transactions a day. Plus 15+ other banking features.',
+    note: 'Credit card program and authorization engine overhaul: thousands of multi-currency transactions a day. Plus 15+ other banking features.',
     years: '2023 – 24',
     href: SITES.loop,
     accent: ACCENT.loop,
